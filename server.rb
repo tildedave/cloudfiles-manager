@@ -1,26 +1,28 @@
 require 'sinatra'
+require 'json'
 require 'rubygems'
 require 'cloudfiles'
 require 'sinatra/reloader'
 
+# not doing any actual templating, all data
+# returned/parsed/displayed by JavaScript
+require 'erubis'
+
 enable :sessions
 
+def get_cloudfiles_connection
+    return CloudFiles::Connection.new(:username => IO.read('./user'),
+                                      :api_key => IO.read('./api-key'))
+
+end
+
 get '/' do
-  'Hello, world!'
+  erubis :index
 end
 
-get '/files' do
-  puts session
-  if not session.has_key?(:cf) then
-    print session
-    redirect to('/login')
-  end
-
-  'better show some files!'
-end
-
-get '/login' do
-  session[:cf] = CloudFiles::Connection.new(:username => IO.read('./user'),
-                                            :api_key => IO.read('./api-key'))
-  redirect back
+get '/containers' do
+  cf = get_cloudfiles_connection
+  
+  content_type :json
+  cf.containers.to_json
 end
