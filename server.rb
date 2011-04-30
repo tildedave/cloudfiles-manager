@@ -19,15 +19,15 @@ class Auth
     return IO.read('./user')
   end
 
-  def ensure_auth_info(session)
+  def self.ensure_auth_info(session)
     if not (session.has_key?(:storage_url) and 
             session.has_key?(:cdn_management_url) and
             session.has_key?(:auth_token)) then
-      get_auth_info session
+      Auth.get_auth_info session
     end
   end
 
-  def get_auth_info(session)
+  def self.get_auth_info(session)
     client = HTTPClient.new
     header = [['X-Auth-User', Auth.get_user],
               ['X-Auth-Key', Auth.get_api_key]]
