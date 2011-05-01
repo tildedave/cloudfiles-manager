@@ -1,0 +1,21 @@
+{namespace rackspace.ui.cloud_files}
+/**
+ * Container Table Impl
+ * @param containers Cloud Files containers
+ */
+{template .container_table_tmpl}
+<table>
+  <th>
+    <td>Name</td>
+    <td>Files</td>
+    <td>Size</td>
+  </th>
+  {foreach $container in $containers}
+    <tr>
+      <td>{$container.name}</td>
+      <td>{$container.count}</td>
+      <td>{$container.bytes}</td>
+    </tr>
+  {/foreach}
+</table>
+{/template}
