@@ -1,14 +1,54 @@
 <html>
 
   <head>
-    <script src="http://localhost:9810/compile?id=filemanager"></script>
+    <script src="http://localhost:9810/compile?id=app"></script>
     <script>
+      goog.require('goog.dom');
+      goog.require('goog.net.XhrIo');
+      goog.require('goog.ui.Dialog');
+      goog.require('goog.ui.Component');
+
+      function doit(){
+        var table = new rackspace.ui.cloud_files.container_table();
+        table.render(document.getElementById('containers'));
+        table.load();
+      }
+
+      function showAddContainerDialog(){
+        var buttonSet = new goog.ui.Dialog.ButtonSet();
+        buttonSet.addButton({key: "add", caption: "Add Container"});
+        buttonSet.addButton({key: "cancel", caption: "Cancel"}, true, true);
+        var dialog1 = new goog.ui.Dialog();
+        dialog1.setContent('Name: <input type="text" name="container_name" id="add_container_text_box" />');
+        dialog1.setTitle('Add Container');
+     
+        dialog1.setButtonSet(buttonSet);
+     
+        goog.events.listen(dialog1, goog.ui.Dialog.EventType.SELECT, function(e) {
+          if(e.key == "add"){
+            var name = document.getElementById('add_container_text_box').value;
+
+            goog.net.XhrIo.send('/proxy/call?type=storage&method=PUT&path=' + name + '%3Fformat=json', function(e) {
+              var xhr = e.target;
+
+              alert(xhr.getResponseText());
+            });
+          }
+        });
+        dialog1.setVisible(true);
+      }
+
+/*
       var fileFetcher = new rackspace.filemanager.FileFetcher();
       var request = fileFetcher.getRequest();
       fileFetcher.getFiles();
+*/
     </script>
   </head>
 
-  <body>
+  <body onload="doit()">
+    <input type="button" value="Add Container" onclick="showAddContainerDialog()" />
+    <div id="containers">
+    </div>
   </body>
 </html>
