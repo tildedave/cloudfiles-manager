@@ -20,7 +20,7 @@ rackspace.ui.cloud_files.container = function(opt_domHelper, name, count, bytes)
 
 goog.inherits(rackspace.ui.cloud_files.container, goog.ui.Component);
 
-// TODO: structure these better, i.e. put them into a table
+// TODO: structure these better, i.e. put them into a table or a list
 rackspace.ui.cloud_files.container.prototype.createDom = function() {
     var parent = this.parent_;
     var templ = goog.dom.htmlToDocumentFragment("<div class=\"container\">" + this.name + "</div>");

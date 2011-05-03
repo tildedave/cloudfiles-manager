@@ -2,6 +2,7 @@ goog.provide('rackspace.ui.cloud_files.container_table');
 
 goog.require('goog.dom');
 goog.require('goog.ui.Component');
+goog.require('goog.ui.Tooltip');
 
 rackspace.ui.cloud_files.container_table = function(opt_lable, opt_domHelper) {
   goog.ui.Component.call(this, opt_domHelper);
@@ -22,18 +23,17 @@ rackspace.ui.cloud_files.container_table.prototype.decorateInternal = function(t
 };
 
 rackspace.ui.cloud_files.container_table.prototype.setData = function(data){
-
     var dom = this.getDomHelper();
-
     for(var i = 0; i < data.length; i++) {
         var containerData = data[i];
         console.log(containerData);
         var container = new rackspace.ui.cloud_files.container(dom, containerData.name, 
                                                                containerData.count, containerData.bytes);
         this.addChild(container, true);
+        console.log(container.getElement());
+        var tooltip = new goog.ui.Tooltip(container.getElement());
+        tooltip.setHtml("<ul><li>Count: " + containerData.count + "</li><li>Bytes: "  + containerData.bytes + "</li></ul>");
     }
-
-    this.render();
 };
 
 rackspace.ui.cloud_files.container_table.prototype.load = function(element){
