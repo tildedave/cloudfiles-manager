@@ -5,11 +5,11 @@
  */
 {template .container_table_tmpl}
 <table>
-  <th>
-    <td>Name</td>
-    <td>Files</td>
-    <td>Size</td>
-  </th>
+  <tr> 
+    <th>Name</th>
+    <th>Files</th>
+    <th>Size</th>
+  </tr>
   {foreach $container in $containers}
     <tr>
       <td>{$container.name}</td>
