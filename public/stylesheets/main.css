@@ -1,0 +1,7 @@
+.goog-tooltip {
+    background: infobackground;
+    color: infotext;
+    border: 1px solid infotext;
+    padding-right: 20px;
+    font: menu;
+}
