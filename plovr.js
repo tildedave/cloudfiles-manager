@@ -4,6 +4,7 @@
     "paths": "src/main",
     "inputs": [ "src/main/js/filemanager.js",
                 "src/main/js/container_table.js",
-                "src/main/soy/container_table_tmpl.soy"   
+                "src/main/js/container.js",
+                "src/main/soy/cloud_files.soy"
               ]
 }

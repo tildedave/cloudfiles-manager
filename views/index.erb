@@ -10,10 +10,12 @@
 
       function doit(){
         var table = new rackspace.ui.cloud_files.container_table();
+
         table.render(document.getElementById('containers'));
         table.load();
       }
 
+      // doesn't work now, rewrite
       function showAddContainerDialog(){
         var buttonSet = new goog.ui.Dialog.ButtonSet();
         buttonSet.addButton({key: "add", caption: "Add Container"});
