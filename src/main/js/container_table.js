@@ -1,47 +1,32 @@
-goog.provide('rackspace.ui.cloud_files.container_table');
-
 goog.require('goog.dom');
-goog.require('goog.ui.Component');
-goog.require('goog.ui.Tooltip');
+goog.require('goog.net.XhrIo');
 
-rackspace.ui.cloud_files.container_table = function(opt_lable, opt_domHelper) {
-  goog.ui.Component.call(this, opt_domHelper);
-  this.containers = [];
+goog.provide('ui.cloud_files.ContainerTable');
+
+ui.cloud_files.ContainerTable = function () {
 };
 
-goog.inherits(rackspace.ui.cloud_files.container_table, goog.ui.Component);
-
-rackspace.ui.cloud_files.container_table.prototype.createDom = function(){
-    console.log(this.containers);
-    var table = goog.dom.htmlToDocumentFragment(
-        rackspace.ui.cloud_files.container_table_tmpl());
-    this.decorateInternal(table);
+ui.cloud_files.ContainerTable.prototype.load = function () {
+    var that = this;
+    var renderResponse = function (e) {
+        that.renderTable(e.target.getResponseJson());
+    };
+    goog.net.XhrIo.send('/containers', renderResponse);
 };
 
-rackspace.ui.cloud_files.container_table.prototype.decorateInternal = function(table){
-  rackspace.ui.cloud_files.container_table.superClass_.decorateInternal.call(this, table);
+ui.cloud_files.ContainerTable.prototype.renderTable = function (data) {
+    var htmlTable = /** @type (string) */
+        ui.cloud_files.ContainerTableTmpl({containers: data});
+    var domTable = /** @type (Node) */ 
+        goog.dom.htmlToDocumentFragment(htmlTable);
+    goog.dom.appendChild(
+        goog.dom.getElement("containers"),
+        domTable);
 };
 
-rackspace.ui.cloud_files.container_table.prototype.setData = function(data){
-    var dom = this.getDomHelper();
-    for(var i = 0; i < data.length; i++) {
-        var containerData = data[i];
-        console.log(containerData);
-        var container = new rackspace.ui.cloud_files.container(dom, containerData.name, 
-                                                               containerData.count, containerData.bytes);
-        this.addChild(container, true);
-        console.log(container.getElement());
-        var tooltip = new goog.ui.Tooltip(container.getElement());
-        tooltip.setHtml("<ul><li>Count: " + containerData.count + "</li><li>Bytes: "  + containerData.bytes + "</li></ul>");
-    }
-};
 
-rackspace.ui.cloud_files.container_table.prototype.load = function(element){
-  var x = this;
-  goog.net.XhrIo.send('/containers', function(e) {
-    var xhr = e.target;
-    var obj = xhr.getResponseJson();
 
-    x.setData(obj);
-  });
-}
+
+
+
+
