@@ -5,9 +5,11 @@
     <script src="http://localhost:9810/compile?id=app"></script>
     <script>
       goog.require("ui.cloud_files.ContainerTable");
+      goog.require("model.mock.ContainerProvider");
 
       function doit(){
-        var table = new ui.cloud_files.ContainerTable();
+        var mockProvider = new model.mock.ContainerProvider();
+        var table = new ui.cloud_files.ContainerTable(mockProvider);
         table.load();
       }
     </script>

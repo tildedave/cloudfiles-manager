@@ -1,17 +1,14 @@
 goog.require('goog.dom');
-goog.require('goog.net.XhrIo');
+goog.require('model.mock.ContainerProvider');
 
 goog.provide('ui.cloud_files.ContainerTable');
 
-ui.cloud_files.ContainerTable = function () {
+ui.cloud_files.ContainerTable = function (dataProvider) {
+    this.dataProvider = dataProvider;
 };
 
 ui.cloud_files.ContainerTable.prototype.load = function () {
-    var that = this;
-    var renderResponse = function (e) {
-        that.renderTable(e.target.getResponseJson());
-    };
-    goog.net.XhrIo.send('/containers', renderResponse);
+    this.dataProvider.loadData(this);
 };
 
 ui.cloud_files.ContainerTable.prototype.renderTable = function (data) {
