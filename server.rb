@@ -54,12 +54,10 @@ class CloudFileRepository
     header = [[ "X-Auth-Token", @auth_token ]]
     client = HTTPClient.new
     response = client.get_content(uri, args, header)
-    STDERR.puts response.dump
     return response
   end
 
   def api_get(uri, args)
-    STDERR.puts "uri: #{uri}, token: #{@auth_token}"
     header = [[ "X-Auth-Token", @auth_token ]]
     client = HTTPClient.new
     response = client.get(uri, args, header)
@@ -70,6 +68,13 @@ class CloudFileRepository
     header = [[ "X-Auth-Token", @auth_token ]]
     client = HTTPClient.new
     response = client.delete(uri, header)
+    return response
+  end
+
+  def api_put(uri, args)
+    header = [[ "X-Auth-Token", @auth_token ]]
+    client = HTTPClient.new
+    response = client.put(uri, {}, header)
     return response
   end
 end
@@ -141,6 +146,11 @@ class StorageRepository < CloudFileRepository
     
     return api_delete("#{@storage_url}/#{escaped_container}/#{escaped_name}", {})
   end
+
+  def createContainer (container) 
+    escaped_container = URI.escape(container)
+    return api_put("#{@storage_url}/#{escaped_container}", {})
+  end
 end
 
 enable :sessions
@@ -181,17 +191,19 @@ get '/containers/?' do
   storage_repository.list
 end
 
+post '/containers/:container' do
+  storage_repository = StorageRepository.new(session)
+  content_type :json
+  storage_repository.createContainer params[:container]
+end
+
 post '/upload/:container' do
   storage_repository = StorageRepository.new(session)
-
-  STDERR.puts "PARAMS #{params}"
 
   tmpfile = params[:file][:tempfile]
   name = params[:file][:filename]
   type = params[:file][:type]
   container = params[:container]
-
-  STDERR.puts "tmpfile: #{tmpfile}  with name: #{name} to container: #{container}"
 
   storage_repository = StorageRepository.new(session)
   storage_repository.postFile params[:container], name, type, tmpfile
@@ -207,11 +219,3 @@ delete '/containers/:container/:name' do
 
   storage_repository.deleteFile(params[:container],params[:name])
 end
-
-
-
-
-
-
-
-
