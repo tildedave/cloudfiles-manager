@@ -6,10 +6,14 @@
  */
 {template .ContainerTableTmpl}
 <div id="containerTable">
-  <input type="button" 
-         value="Add Container" 
-         onclick="showAddContainerDialog()" />
-  <table>
+  <div class="header">
+    <span class="buttons">
+      <input type="button" 
+             value="Add Container" 
+             onclick="showAddContainerDialog()" />
+    </span>
+  </div>
+  <table class="cloud_files">
     <thead>
       <tr>
         <th>Name</th>
@@ -32,18 +36,24 @@
 
 /**
  * Container Table Impl
+ * @param container The container name
  * @param objects The objects.
  * 
  */
 {template .ObjectTableTmpl}
 <div id="objectTable">
-  <input type="button" 
-         id="backObject"
-         value="Go Back"  />
-  <input type="button" 
-         id="uploadObject"
-         value="Upload Object" />
-  <table>
+  <div class="header">
+    <span id="containerObject">{$container}</span>
+    <span class="buttons">
+      <input type="button" 
+             id="backObject"
+             value="Go Back"  />
+      <input type="button" 
+             id="uploadObject"
+             value="Upload Object" />
+    </span>
+  </div>
+  <table class="cloud_files">
     <thead>
       <tr>
         <th>Name</th>

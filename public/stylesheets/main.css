@@ -5,3 +5,35 @@
     padding-right: 20px;
     font: menu;
 }
+
+#logo {
+    float: top;
+    padding-bottom: 5px;
+}
+
+#entity-view {
+    padding: 15px;
+    border: 1pt solid;
+    width: 400px;
+}
+
+.container {
+    cursor: pointer;
+}
+
+.header {
+    padding: 5px;
+    padding-bottom: 15px;
+}
+
+.buttons {
+    float: right;
+}
+
+.cloud_files th {
+    text-align: left;
+}
+
+.cloud_files td {
+    padding-right: 15px;
+}
