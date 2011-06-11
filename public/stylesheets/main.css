@@ -14,7 +14,7 @@
 #entity-view {
     padding: 15px;
     border: 1pt solid;
-    width: 700px;
+    width: 800px;
 }
 
 .container {
@@ -40,4 +40,9 @@
 
 .cloud_files td {
     padding-right: 15px;
+}
+
+.delete {
+    text-align: right;
+    padding-left: 20px;
 }
