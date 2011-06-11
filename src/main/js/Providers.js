@@ -23,7 +23,8 @@ ui.Providers.getContainerProvider = function () {
     }
   ];
 
-  return new model.cache.ContainerProvider(testData);
+//  return new model.cache.ContainerProvider(testData);
+  return new model.xhr.ContainerProvider();
 };
 
 ui.Providers.getObjectProvider = function () {
