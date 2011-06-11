@@ -48,12 +48,13 @@ ui.Broker.prototype.selectAllContainers = function () {
     }
   ];
 
-  var table = new ui.cloud_files.ContainerTable(this);
-  var mockProvider = new model.cache.ContainerProvider(table);
-  table.setProvider(mockProvider);
+  var mockProvider = new model.cache.ContainerProvider();
+  var table = new ui.cloud_files.ContainerTable(this, mockProvider);
   mockProvider.setData(testData);
   table.load();
 };
 
 ui.Broker.prototype.selectContainer = function (name) {
 };
+
+

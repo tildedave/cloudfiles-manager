@@ -8,11 +8,10 @@ goog.provide('model.xhr.ContainerProvider');
  * @constructor
  */
 model.cache.ContainerProvider = function(table) {
-  this.table = table;
 };
 
-model.cache.ContainerProvider.prototype.get = function() {
-    this.table.renderTable(this.data);
+model.cache.ContainerProvider.prototype.get = function(table) {
+    table.getResponse(this.data);
 };
 
 model.cache.ContainerProvider.prototype.setData = function(data) {
@@ -22,13 +21,11 @@ model.cache.ContainerProvider.prototype.setData = function(data) {
 /**
  * @constructor
  */
-model.xhr.ContainerProvider = function(table) {
-    this.table = table;
+model.xhr.ContainerProvider = function() {
 };
 
-model.xhr.ContainerProvider.prototype.get = function() {
-  var table = this.table;
+model.xhr.ContainerProvider.prototype.get = function(table) {
   goog.net.XhrIo.send('/containers', function (e) {
-    table.renderTable(e.target.getResponseJson());
+    table.getResponse(e.target.getResponseJson());
   });
 };

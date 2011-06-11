@@ -6,20 +6,19 @@ goog.provide('ui.cloud_files.ContainerTable');
 
 /**
  * @constructor
- * @extends {goog.events.EventTarget}
  */
-ui.cloud_files.ContainerTable = function (broker) {
-  goog.events.EventTarget.call(this);
+ui.cloud_files.ContainerTable = function (broker, provider) {
   this.broker = broker;
-  this.containers = [];
-};
-
-ui.cloud_files.ContainerTable.prototype.setProvider = function (provider) {
   this.provider = provider;
+  this.containers = [];
 };
 
 ui.cloud_files.ContainerTable.prototype.load = function () {
     this.provider.get(this);
+};
+
+ui.cloud_files.ContainerTable.prototype.getResponse = function (data) {
+    this.renderTable(data);
 };
 
 ui.cloud_files.ContainerTable.prototype.renderTable = function (data) {
@@ -32,13 +31,13 @@ ui.cloud_files.ContainerTable.prototype.renderTable = function (data) {
         goog.dom.getElement("entity-view"),
         domTable);
 
-  this.bindEvents();
+  var containersDom = goog.dom.getElementsByClass('container');
+  this.createContainers(containersDom);
 };
 
-ui.cloud_files.ContainerTable.prototype.bindEvents = function (data) {
-  var containerDom = goog.dom.getElementsByClass('container');
-  for(var i = 0, l = containerDom.length; i < l; ++i) {
-    var container = new ui.cloud_files.Container(this.broker, containerDom[i]);
+ui.cloud_files.ContainerTable.prototype.createContainers = function (containersDom) {
+  for(var i = 0, l = containersDom.length; i < l; ++i) {
+    var container = new ui.cloud_files.Container(this.broker, containersDom[i]);
     this.containers.push(container);
   }
 };

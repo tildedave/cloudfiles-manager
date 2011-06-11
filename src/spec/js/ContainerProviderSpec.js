@@ -7,9 +7,9 @@ describe("ContainerProvider", function () {
 
   beforeEach(function () {
     table = {
-      renderTable : function () { }
+      getResponse : function () { }
     };
-    spyOn(table, "renderTable");
+    spyOn(table, "getResponse");
   });
   
   it("renders the table from cache", function () {
@@ -23,8 +23,8 @@ describe("ContainerProvider", function () {
     var cacheProvider = new model.cache.ContainerProvider(table);
     cacheProvider.setData(data);
     
-    cacheProvider.get();
-    expect(table.renderTable).toHaveBeenCalledWith(data);
+    cacheProvider.get(table);
+    expect(table.getResponse).toHaveBeenCalledWith(data);
   });
 
   it("renders the table from xhr", function () {
@@ -47,8 +47,8 @@ describe("ContainerProvider", function () {
     
     var xhrProvider = new model.xhr.ContainerProvider(table);
 
-    xhrProvider.get();
-    expect(table.renderTable).toHaveBeenCalledWith(data);
+    xhrProvider.get(table);
+    expect(table.getResponse).toHaveBeenCalledWith(data);
     
   });
 
