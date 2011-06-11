@@ -3,6 +3,7 @@
     "id": "app",
     "paths": "src/main",
     "inputs": [ "src/main/js/container_table.js",
+                "src/main/js/Bootstrap.js",
                 "src/main/soy/cloud_files.soy"
               ],
     "level": "VERBOSE", 
