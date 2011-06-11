@@ -26,3 +26,4 @@ model.xhr.FileProvider.prototype.get = function() {
   var url = '/containers/' + this.container + '/' + this.name;
   window.open(url, "Download");    
 };
+

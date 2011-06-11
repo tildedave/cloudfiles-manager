@@ -1,9 +1,12 @@
 goog.provide('ui.cloud_files.ObjectTable');
 
 goog.require('goog.dom');
-goog.require('ui.Events');
+goog.require('goog.ui.Dialog');
 goog.require('goog.events.KeyHandler');
+
+goog.require('ui.Events');
 goog.require('ui.cloud_files.Object');
+goog.require('ui.cloud_files.UploadFileDialog');
 
 /**
  * @constructor
@@ -44,7 +47,8 @@ ui.cloud_files.ObjectTable.prototype.bindEvents = function () {
 
   var uploadButton = goog.dom.getElement("uploadObject");
   goog.events.listen(uploadButton, goog.events.EventType.CLICK, function (e) {
-    alert("Time to upload a file to " + container + "!");
+    var dialog = new ui.cloud_files.UploadFileDialog(container);
+    dialog.setVisible(true);
   });
 
   var objectDoms = goog.dom.getElementsByClass("object");

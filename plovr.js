@@ -9,6 +9,7 @@
       "src/main/js/ObjectTable.js",
       "src/main/js/Bootstrap.js",
       "src/main/js/Providers.js",
+      "src/main/js/UploadFileDialog.js",
       "src/main/soy/cloud_files.soy"
     ],
     "level": "VERBOSE",

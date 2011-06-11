@@ -8,7 +8,7 @@ goog.require('model.xhr.ContainerProvider');
 goog.require('model.xhr.ObjectProvider');
 goog.require('model.xhr.FileProvider');
 
-ui.Providers.xhr = true;
+ui.Providers.xhr = false;
 
 ui.Providers.getContainerProvider = function () {
   var testData = [
