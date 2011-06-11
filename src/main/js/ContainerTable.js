@@ -7,7 +7,8 @@ goog.provide('ui.cloud_files.ContainerTable');
 /**
  * @constructor
  */
-ui.cloud_files.ContainerTable = function () {
+ui.cloud_files.ContainerTable = function (entityTable) {
+  this.entityTable = entityTable;
 };
 
 ui.cloud_files.ContainerTable.prototype.setProvider = function (provider) {
@@ -34,6 +35,7 @@ ui.cloud_files.ContainerTable.prototype.bindEvents = function (data) {
 
   var containers = goog.dom.getElementsByClass('container');
   for(var i = 0, l = containers.length; i < l; ++i) {
-    var container = new ui.cloud_files.Container(containers[i]);
+    var container = new ui.cloud_files.Container(containers[i],
+                                                 this.entityTable);
   }
 };
