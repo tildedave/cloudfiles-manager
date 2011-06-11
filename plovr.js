@@ -2,7 +2,7 @@
 {
     "id": "app",
     "paths": "src/main",
-    "inputs": [ "src/main/js/container_table.js",
+    "inputs": [ "src/main/js/ContainerTable.js",
                 "src/main/js/Bootstrap.js",
                 "src/main/soy/cloud_files.soy"
               ],
