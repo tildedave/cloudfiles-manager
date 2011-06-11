@@ -22,7 +22,3 @@ ui.cloud_files.Container = function (dom, entityTable) {
 
 goog.inherits(ui.cloud_files.Container, goog.events.EventTarget);
 
-
-
-
-

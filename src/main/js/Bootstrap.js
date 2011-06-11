@@ -1,5 +1,5 @@
+goog.require("ui.Events");
 goog.require("ui.cloud_files.EntityTable");
-
 goog.require("ui.cloud_files.ContainerTable");
 goog.require("model.cache.ContainerProvider");
 

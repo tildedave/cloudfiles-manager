@@ -6,10 +6,13 @@ goog.provide('ui.cloud_files.ContainerTable');
 
 /**
  * @constructor
+ * @extends {goog.events.EventTarget}
  */
 ui.cloud_files.ContainerTable = function (entityTable) {
+  goog.events.EventTarget.call(this);
   this.entityTable = entityTable;
 };
+goog.inherits(ui.cloud_files.ContainerTable, goog.events.EventTarget);
 
 ui.cloud_files.ContainerTable.prototype.setProvider = function (provider) {
   this.provider = provider;
