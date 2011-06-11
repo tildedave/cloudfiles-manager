@@ -38,12 +38,14 @@ ui.Broker.prototype.clearBroker = function () {
 };
 
 ui.Broker.prototype.selectAllContainers = function () {
+  window.location.hash = "";
   var provider = ui.Providers.getContainerProvider();
   var table = new ui.cloud_files.ContainerTable(this, provider);
   table.load();
 };
 
 ui.Broker.prototype.selectContainer = function (name) {
+  window.location.hash = "!" + name;
   var provider = ui.Providers.getObjectProvider(name);
   var table = new ui.cloud_files.ObjectTable(this, provider, name);
   table.load();
