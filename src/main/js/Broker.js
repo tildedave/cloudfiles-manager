@@ -21,13 +21,13 @@ ui.Broker.prototype.bindEvents = function () {
   parentObj.addEventListener(ui.Events.SELECT_ALL_CONTAINERS,
                               function (e) {
                                 parentObj.clearBroker();
-                                parentObj.selectAllContainers(parentObj);
+                                parentObj.selectAllContainers();
                               });
   
   parentObj.addEventListener(ui.Events.SELECT_CONTAINER,
                               function (e) {
                                 parentObj.clearBroker();
-                                parentObj.selectContainer(parentObj, e.target.name);
+                                parentObj.selectContainer(e.target.name);
                               });
 };
 
@@ -67,7 +67,7 @@ ui.Broker.prototype.selectContainer = function (name) {
     } ];
 
   var mockProvider = new model.cache.ObjectProvider(testData);
-  var table = new ui.cloud_files.ObjectTable(this, mockProvider);
+  var table = new ui.cloud_files.ObjectTable(this, mockProvider, name);
   table.load();
 };
 
