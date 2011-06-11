@@ -5,18 +5,27 @@
  * 
  */
 {template .ContainerTableTmpl}
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Files</th>
-    <th>Size</th>
-  </tr>
-  {foreach $container in $containers}
-  <tr>
-    <td>{$container.name}</td>
-    <td>{$container.count}</td>
-    <td>{$container.bytes}</td>
-  </tr>
-  {/foreach}
-</table>
+<div id="containerTable">
+  <input type="button" 
+         value="Add Container" 
+         onclick="showAddContainerDialog()" />
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Files</th>
+        <th>Size</th>
+      </tr>
+    </thead>
+    <tbody>
+      {foreach $container in $containers}
+      <tr>
+        <td class="container">{$container.name}</td>
+        <td class="count">{$container.count}</td>
+        <td class="bytes">{$container.bytes}</td>
+      </tr>
+      {/foreach}
+    </tbody>
+  </table>
+</div>
 {/template}

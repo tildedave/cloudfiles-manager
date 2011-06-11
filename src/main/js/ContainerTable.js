@@ -1,5 +1,6 @@
 goog.require('goog.dom');
 goog.require('model.cache.ContainerProvider');
+goog.require('ui.cloud_files.Container');
 
 goog.provide('ui.cloud_files.ContainerTable');
 
@@ -23,13 +24,16 @@ ui.cloud_files.ContainerTable.prototype.renderTable = function (data) {
     var domTable = /** @type (Node) */ 
         goog.dom.htmlToDocumentFragment(htmlTable);
     goog.dom.appendChild(
-        goog.dom.getElement("containers"),
+        goog.dom.getElement("entity-view"),
         domTable);
+
+  this.bindEvents();
 };
 
+ui.cloud_files.ContainerTable.prototype.bindEvents = function (data) {
 
-
-
-
-
-
+  var containers = goog.dom.getElementsByClass('container');
+  for(var i = 0, l = containers.length; i < l; ++i) {
+    var container = new ui.cloud_files.Container(containers[i]);
+  }
+};
