@@ -3,6 +3,7 @@ require 'json'
 require 'rubygems'
 require 'httpclient'
 require 'sinatra/reloader'
+require 'cgi'
 
 # not doing any actual templating, all data
 # returned/parsed/displayed by JavaScript
@@ -93,6 +94,11 @@ class StorageRepository < CloudFileRepository
     puts :storage_url
     return api_get(@storage_url, {})
   end
+
+  def get (container)
+    escaped_container = URI.escape(container)
+    return api_get("#{@storage_url}/#{escaped_container}", {})
+  end
 end
 
 enable :sessions
@@ -112,7 +118,13 @@ get '/auth' do
   Auth.get_auth_info(session)
 end
 
-get '/containers' do
+get '/containers/:container' do
+  storage_repository = StorageRepository.new(session)
+  content_type :json
+  storage_repository.get params[:container]
+end
+
+get '/containers/?' do
   storage_repository = StorageRepository.new(session)
   cdn_url = storage_repository.storage_url
 

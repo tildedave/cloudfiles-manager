@@ -27,7 +27,7 @@ ui.Providers.getContainerProvider = function () {
   return new model.xhr.ContainerProvider();
 };
 
-ui.Providers.getObjectProvider = function () {
+ui.Providers.getObjectProvider = function (container) {
   var testData = [
     { name: "Puppy",
       hash: "35987158127295187",
@@ -36,5 +36,6 @@ ui.Providers.getObjectProvider = function () {
       last_modified: "Today"
     } ];
 
-  return new model.cache.ObjectProvider(testData);
+  //return new model.cache.ObjectProvider(container, testData);
+  return new model.xhr.ObjectProvider(container, testData);
 };
