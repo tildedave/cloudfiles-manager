@@ -10,9 +10,9 @@ goog.require('ui.Events');
  * @extends {goog.events.EventTarget}
  */
 ui.cloud_files.Container = function (dom) {
-  this.dom = dom;
+  goog.events.EventTarget.call(this);
+
   var parentObj = this;
-  
   goog.events.listen(this.dom, goog.events.EventType.CLICK,
                      function (e) {
                        parentObj.dispatchEvent(ui.Events.SELECT_CONTAINER,
