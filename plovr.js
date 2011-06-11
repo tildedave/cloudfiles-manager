@@ -9,7 +9,7 @@
     "checks": {
         // acceptable values are "ERROR", "WARNING", and "OFF" 
         "deprecated": "ERROR",
-        "checkTypes": "WARNING",
+        "checkTypes": "OFF",
         "missingProperties": "ERROR",
         "strictModuleDepCheck": "ERROR",
         "accessControls": "ERROR",
