@@ -1,14 +1,20 @@
 goog.require('goog.dom');
-goog.require('model.mock.ContainerProvider');
+goog.require('model.cache.ContainerProvider');
 
 goog.provide('ui.cloud_files.ContainerTable');
 
-ui.cloud_files.ContainerTable = function (dataProvider) {
-    this.dataProvider = dataProvider;
+/**
+ * @constructor
+ */
+ui.cloud_files.ContainerTable = function () {
+};
+
+ui.cloud_files.ContainerTable.prototype.setProvider = function (provider) {
+  this.provider = provider;
 };
 
 ui.cloud_files.ContainerTable.prototype.load = function () {
-    this.dataProvider.loadData(this);
+    this.provider.get(this);
 };
 
 ui.cloud_files.ContainerTable.prototype.renderTable = function (data) {
