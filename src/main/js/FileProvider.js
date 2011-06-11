@@ -14,7 +14,6 @@ model.cache.FileProvider.prototype.get = function() {
 };
 
 model.cache.FileProvider.prototype.delete_ = function (objectTable) {
-  window.console.log("zomg delete file");
   objectTable.deleteResponse();
 };
 /**
@@ -32,7 +31,6 @@ model.xhr.FileProvider.prototype.get = function() {
 };
 
 model.xhr.FileProvider.prototype.delete_ = function (objectTable) {
-  window.console.log("zomg delete file " + this.container + " and " + this.name);
   goog.net.XhrIo.send('/containers/' + this.container + '/' + this.name,
                       function (e) {
                         objectTable.deleteResponse();

@@ -18,8 +18,6 @@ ui.cloud_files.ConfirmFileDeleteDialog = function (objectTable, container,
   this.setButtonSet(new goog.ui.Dialog.ButtonSet.createOkCancel());
   goog.events.listen(this, goog.ui.Dialog.EventType.SELECT, function (e) {
     if (e.key === "ok") {
-      window.console.log("you wanted to delete " + object +
-                         " from container " + container);
       objectTable.deleteFile(object);
     }
   });

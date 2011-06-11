@@ -11,6 +11,7 @@
       "src/main/js/Providers.js",
       "src/main/js/UploadFileDialog.js",
       "src/main/js/ConfirmFileDeleteDialog.js",
+      "src/main/js/CreateContainerDialog.js",
       "src/main/js/FileProvider.js",
       "src/main/js/ContainerProvider.js",
       "src/main/js/ObjectProvider.js",
