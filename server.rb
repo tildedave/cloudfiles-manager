@@ -172,5 +172,8 @@ post '/upload/:container' do
 
   storage_repository = StorageRepository.new(session)
   storage_repository.postFile params[:container], name, type, tmpfile
+  
+  escaped_container = URI.escape(container)
 
+  redirect "/#!#{escaped_container}"
 end
