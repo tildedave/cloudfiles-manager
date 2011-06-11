@@ -21,6 +21,10 @@
     cursor: pointer;
 }
 
+.object {
+    cursor: pointer;
+}
+
 .header {
     padding: 5px;
     padding-bottom: 15px;

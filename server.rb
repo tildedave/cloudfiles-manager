@@ -48,7 +48,6 @@ class CloudFileRepository
 
   def api_get(uri, args)
     args[:format] = 'json'
-
     puts "uri: #{uri}, token: #{@auth_token}"
     header = [[ "X-Auth-Token", @auth_token ]]
     client = HTTPClient.new
@@ -57,6 +56,7 @@ class CloudFileRepository
     puts response
     return response
   end
+
 end
 
 class CDNRepository < CloudFileRepository
@@ -99,6 +99,12 @@ class StorageRepository < CloudFileRepository
     escaped_container = URI.escape(container)
     return api_get("#{@storage_url}/#{escaped_container}", {})
   end
+
+  def getFile (container, name)
+    escaped_container = URI.escape(container)
+    escaped_name = URI.escape(name)
+    return api_get("#{@storage_url}/#{escaped_container}/#{escaped_name}", {})
+  end
 end
 
 enable :sessions
@@ -124,6 +130,11 @@ get '/containers/:container' do
   storage_repository.get params[:container]
 end
 
+get '/containers/:container/:name' do
+  storage_repository = StorageRepository.new(session)
+  storage_repository.getFile params[:container], params[:name]
+end
+
 get '/containers/?' do
   storage_repository = StorageRepository.new(session)
   cdn_url = storage_repository.storage_url
@@ -131,4 +142,3 @@ get '/containers/?' do
   content_type :json
   storage_repository.list
 end
-
