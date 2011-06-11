@@ -11,8 +11,8 @@ goog.provide('ui.cloud_files.ContainerTable');
 ui.cloud_files.ContainerTable = function (broker) {
   goog.events.EventTarget.call(this);
   this.broker = broker;
+  this.containers = [];
 };
-goog.inherits(ui.cloud_files.ContainerTable, goog.events.EventTarget);
 
 ui.cloud_files.ContainerTable.prototype.setProvider = function (provider) {
   this.provider = provider;
@@ -36,9 +36,9 @@ ui.cloud_files.ContainerTable.prototype.renderTable = function (data) {
 };
 
 ui.cloud_files.ContainerTable.prototype.bindEvents = function (data) {
-
-  var containers = goog.dom.getElementsByClass('container');
-  for(var i = 0, l = containers.length; i < l; ++i) {
-    var container = new ui.cloud_files.Container(this.broker, containers[i]);
+  var containerDom = goog.dom.getElementsByClass('container');
+  for(var i = 0, l = containerDom.length; i < l; ++i) {
+    var container = new ui.cloud_files.Container(this.broker, containerDom[i]);
+    this.containers.push(container);
   }
 };
