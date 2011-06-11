@@ -90,10 +90,10 @@ class StorageRepository < CloudFileRepository
   end
 
   def list
+    puts :storage_url
     return api_get(@storage_url, {})
   end
 end
-
 
 enable :sessions
 
@@ -109,7 +109,7 @@ get '/info' do
 end
 
 get '/auth' do
-  Metadata.get_auth_info(session)
+  Auth.get_auth_info(session)
 end
 
 get '/containers' do
