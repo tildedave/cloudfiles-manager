@@ -10,6 +10,10 @@
       "src/main/js/Bootstrap.js",
       "src/main/js/Providers.js",
       "src/main/js/UploadFileDialog.js",
+      "src/main/js/ConfirmFileDeleteDialog.js",
+      "src/main/js/FileProvider.js",
+      "src/main/js/ContainerProvider.js",
+      "src/main/js/ObjectProvider.js",
       "src/main/soy/cloud_files.soy"
     ],
     "level": "VERBOSE",

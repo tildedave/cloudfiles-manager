@@ -49,5 +49,9 @@ ui.Providers.getObjectProvider = function (container) {
 };
 
 ui.Providers.getFileProvider = function (container, name) {
+  if (!ui.Providers.xhr){
+    return new model.cache.FileProvider(container, name);
+  }
+  
   return new model.xhr.FileProvider(container, name);
 };

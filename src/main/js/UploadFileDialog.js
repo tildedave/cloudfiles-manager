@@ -12,9 +12,9 @@ ui.cloud_files.UploadFileDialog = function (container) {
   this.container = container;
 
   var uploadUrl = "/upload/" + container;
-  this.setContent("<h2>Upload a File</h2><ul><li>Not implemented yet</li>" +
-                  "<li>File Upload in JavaScript is annoying (but possible)</li>" +
-                  "</ul>" +
+  
+  // move this into a .soy
+  this.setContent("<h2>Upload a File</h2>" +
                   '<form id="fileUploadForm" action="' + uploadUrl + '" ' +
                        ' method="post" enctype="multipart/form-data">' +
                   '<input type="file" name="file" id="fileUpload">' +
