@@ -48,14 +48,21 @@ class CloudFileRepository
     puts "INITIALIZING TOKEN #{@auth_token}"
   end
 
-  def api_get(uri, args)
+  def api_get_content(uri, args)
     args[:format] = 'json'
     STDERR.puts "uri: #{uri}, token: #{@auth_token}"
     header = [[ "X-Auth-Token", @auth_token ]]
     client = HTTPClient.new
     response = client.get_content(uri, args, header)
+    STDERR.puts response.dump
+    return response
+  end
 
-    puts response
+  def api_get(uri, args)
+    STDERR.puts "uri: #{uri}, token: #{@auth_token}"
+    header = [[ "X-Auth-Token", @auth_token ]]
+    client = HTTPClient.new
+    response = client.get(uri, args, header)
     return response
   end
 end
@@ -93,12 +100,12 @@ class StorageRepository < CloudFileRepository
 
   def list
     puts :storage_url
-    return api_get(@storage_url, {})
+    return api_get_content(@storage_url, {})
   end
 
   def get (container)
     escaped_container = URI.escape(container)
-    return api_get("#{@storage_url}/#{escaped_container}", {})
+    return api_get_content("#{@storage_url}/#{escaped_container}", {})
   end
 
   def getFile (container, name)
@@ -147,7 +154,9 @@ end
 
 get '/containers/:container/:name' do
   storage_repository = StorageRepository.new(session)
-  storage_repository.getFile params[:container], params[:name]
+  response = storage_repository.getFile params[:container], params[:name]
+  content_type response.headers["Content-Type"]
+  response.body
 end
 
 get '/containers/?' do
