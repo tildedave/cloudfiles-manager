@@ -5,7 +5,7 @@ goog.require('model.cache.ObjectProvider');
 goog.require('model.xhr.ContainerProvider');
 goog.require('model.xhr.ObjectProvider');
 
-ui.Providers = {};
+ui.Providers.xhr = false;
 
 ui.Providers.getContainerProvider = function () {
   var testData = [
@@ -23,7 +23,9 @@ ui.Providers.getContainerProvider = function () {
     }
   ];
 
-//  return new model.cache.ContainerProvider(testData);
+  if (!ui.Providers.xhr) {
+    return new model.cache.ContainerProvider(testData);
+  }
   return new model.xhr.ContainerProvider();
 };
 
@@ -36,6 +38,9 @@ ui.Providers.getObjectProvider = function (container) {
       last_modified: "Today"
     } ];
 
-  //return new model.cache.ObjectProvider(container, testData);
+  if (!ui.Providers.xhr) {
+    return new model.cache.ObjectProvider(container, testData);      
+  }
+
   return new model.xhr.ObjectProvider(container, testData);
 };
