@@ -65,6 +65,13 @@ class CloudFileRepository
     response = client.get(uri, args, header)
     return response
   end
+
+  def api_delete(uri, args)
+    header = [[ "X-Auth-Token", @auth_token ]]
+    client = HTTPClient.new
+    response = client.delete(uri, header)
+    return response
+  end
 end
 
 class CDNRepository < CloudFileRepository
@@ -127,6 +134,13 @@ class StorageRepository < CloudFileRepository
     cfObject = cfContainer.create_object(name)
     cfObject.write tmpfile
   end
+
+  def deleteFile (container, name)
+    escaped_container = URI.escape(container)
+    escaped_name = URI.escape(name)
+    
+    return api_delete("#{@storage_url}/#{escaped_container}/#{escaped_name}", {})
+  end
 end
 
 enable :sessions
@@ -186,3 +200,18 @@ post '/upload/:container' do
 
   redirect "/#!#{escaped_container}"
 end
+
+delete '/containers/:container/:name' do
+  storage_repository = StorageRepository.new(session)
+  content_type :json
+
+  storage_repository.deleteFile(params[:container],params[:name])
+end
+
+
+
+
+
+
+
+
