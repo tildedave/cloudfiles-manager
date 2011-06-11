@@ -51,4 +51,6 @@ ui.Broker.prototype.selectContainer = function (name) {
 
 ui.Broker.prototype.downloadObject = function(container, name) {
   window.console.log("download object " + name + " from " + container);
+  var provider = ui.Providers.getFileProvider(name);
+  provider.get();
 };

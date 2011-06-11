@@ -2,8 +2,11 @@ goog.provide('ui.Providers');
 
 goog.require('model.cache.ContainerProvider');
 goog.require('model.cache.ObjectProvider');
+goog.require('model.cache.FileProvider');
+
 goog.require('model.xhr.ContainerProvider');
 goog.require('model.xhr.ObjectProvider');
+goog.require('model.xhr.FileProvider');
 
 ui.Providers.xhr = false;
 
@@ -43,4 +46,8 @@ ui.Providers.getObjectProvider = function (container) {
   }
 
   return new model.xhr.ObjectProvider(container, testData);
+};
+
+ui.Providers.getFileProvider = function (container, name) {
+  return new model.cache.FileProvider(container, name);
 };
