@@ -1,4 +1,4 @@
-goog.provide('ui.cloud_files.EntityTable');
+goog.provide('ui.Broker');
 
 goog.require('goog.dom');
 goog.require('ui.Events');
@@ -7,32 +7,32 @@ goog.require('ui.Events');
  * @constructor
  * @extends {goog.events.EventTarget}
  */
-ui.cloud_files.EntityTable = function () {
+ui.Broker = function () {
   goog.events.EventTarget.call(this);
   this.bindEvents();
 };
-goog.inherits(ui.cloud_files.EntityTable, goog.events.EventTarget);
+goog.inherits(ui.Broker, goog.events.EventTarget);
 
-ui.cloud_files.EntityTable.prototype.bindEvents = function () {
+ui.Broker.prototype.bindEvents = function () {
   var parentObj = this;
   parentObj.addEventListener(ui.Events.SELECT_ALL_CONTAINERS,
                               function (e) {
-                                parentObj.clearEntityTable();
+                                parentObj.clearBroker();
                                 parentObj.selectAllContainers();
                               });
   
   parentObj.addEventListener(ui.Events.SELECT_CONTAINER,
                               function (e) {
-                                parentObj.clearEntityTable();
+                                parentObj.clearBroker();
                                 parentObj.selectContainer(e.target.name);
                               });
 };
 
-ui.cloud_files.EntityTable.prototype.clearEntityTable = function () {
+ui.Broker.prototype.clearBroker = function () {
   goog.dom.removeChildren(goog.dom.getElement("entity-view"));    
 };
 
-ui.cloud_files.EntityTable.prototype.selectAllContainers = function () {
+ui.Broker.prototype.selectAllContainers = function () {
   var testData = [
     { name: "Lucky",
       count: 154,
@@ -55,5 +55,5 @@ ui.cloud_files.EntityTable.prototype.selectAllContainers = function () {
   table.load();
 };
 
-ui.cloud_files.EntityTable.prototype.selectContainer = function (name) {
+ui.Broker.prototype.selectContainer = function (name) {
 };

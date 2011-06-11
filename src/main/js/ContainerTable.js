@@ -8,9 +8,9 @@ goog.provide('ui.cloud_files.ContainerTable');
  * @constructor
  * @extends {goog.events.EventTarget}
  */
-ui.cloud_files.ContainerTable = function (entityTable) {
+ui.cloud_files.ContainerTable = function (broker) {
   goog.events.EventTarget.call(this);
-  this.entityTable = entityTable;
+  this.broker = broker;
 };
 goog.inherits(ui.cloud_files.ContainerTable, goog.events.EventTarget);
 
@@ -39,7 +39,6 @@ ui.cloud_files.ContainerTable.prototype.bindEvents = function (data) {
 
   var containers = goog.dom.getElementsByClass('container');
   for(var i = 0, l = containers.length; i < l; ++i) {
-    var container = new ui.cloud_files.Container(containers[i],
-                                                 this.entityTable);
+    var container = new ui.cloud_files.Container(this.broker, containers[i]);
   }
 };
