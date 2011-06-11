@@ -29,3 +29,39 @@
   </table>
 </div>
 {/template}
+
+/**
+ * Container Table Impl
+ * @param objects The objects.
+ * 
+ */
+{template .ObjectTableTmpl}
+<div id="objectTable">
+  <input type="button" 
+         value="Go Back"  />
+  <input type="button" 
+         value="Upload Object" />
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Hash</th>
+        <th>Bytes</th>
+        <th>Content Type</th>
+        <th>Last Modified</th>
+      </tr>
+    </thead>
+    <tbody>
+      {foreach $object in $objects}
+      <tr>
+        <td class="name">{$object.name}</td>
+        <td class="hash">{$object.hash}</td>
+        <td class="bytes">{$object.bytes}</td>
+        <td class="content_type">{$object.content_type}</td>
+        <td class="last_modified">{$object.last_modified}</td>
+      </tr>
+      {/foreach}
+    </tbody>
+  </table>
+</div>
+{/template}

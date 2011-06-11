@@ -18,10 +18,10 @@ ui.cloud_files.ContainerTable.prototype.load = function () {
 };
 
 ui.cloud_files.ContainerTable.prototype.getResponse = function (data) {
-    this.renderTable(data);
+    this.render(data);
 };
 
-ui.cloud_files.ContainerTable.prototype.renderTable = function (data) {
+ui.cloud_files.ContainerTable.prototype.render = function (data) {
     var htmlTable = /** @type (string) */
         ui.cloud_files.ContainerTableTmpl({containers: data});
     var domTable = /** @type (Node) */ 

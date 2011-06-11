@@ -3,6 +3,9 @@ goog.provide('ui.Broker');
 goog.require('goog.dom');
 goog.require('ui.Events');
 
+goog.require('model.cache.ContainerProvider');
+goog.require('model.cache.ObjectProvider');
+
 /**
  * @constructor
  * @extends {goog.events.EventTarget}
@@ -18,13 +21,13 @@ ui.Broker.prototype.bindEvents = function () {
   parentObj.addEventListener(ui.Events.SELECT_ALL_CONTAINERS,
                               function (e) {
                                 parentObj.clearBroker();
-                                parentObj.selectAllContainers();
+                                parentObj.selectAllContainers(parentObj);
                               });
   
   parentObj.addEventListener(ui.Events.SELECT_CONTAINER,
                               function (e) {
                                 parentObj.clearBroker();
-                                parentObj.selectContainer(e.target.name);
+                                parentObj.selectContainer(parentObj, e.target.name);
                               });
 };
 
@@ -55,6 +58,17 @@ ui.Broker.prototype.selectAllContainers = function () {
 };
 
 ui.Broker.prototype.selectContainer = function (name) {
+  var testData = [
+    { name: "Puppy",
+      hash: "35987158127295187",
+      bytes: 1000,
+      content_type: "text/xml",
+      last_modified: "Today"
+    } ];
+
+  var mockProvider = new model.cache.ObjectProvider(testData);
+  var table = new ui.cloud_files.ObjectTable(this, mockProvider);
+  table.load();
 };
 
 

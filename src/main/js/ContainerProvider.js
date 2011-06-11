@@ -7,7 +7,7 @@ goog.provide('model.xhr.ContainerProvider');
 /**
  * @constructor
  */
-model.cache.ContainerProvider = function(table) {
+model.cache.ContainerProvider = function() {
 };
 
 model.cache.ContainerProvider.prototype.get = function(table) {
