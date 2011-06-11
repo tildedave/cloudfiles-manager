@@ -10,14 +10,20 @@ ui.cloud_files.EntityTable = function () {
   var parentObj = this;
   this.addEventListener(ui.Events.SELECT_ALL_CONTAINERS,
                         function (e) {
+                          parentObj.clear_entity_table();
                           parentObj.select_all_containers();
                         });
   this.addEventListener(ui.Events.SELECT_CONTAINER,
-                        function (e) { 
+                        function (e) {
+                          parentObj.clear_entity_table();
                           parentObj.select_container(e.target.name);
                         });
 };
 goog.inherits(ui.cloud_files.EntityTable, goog.events.EventTarget);
+
+ui.cloud_files.EntityTable.prototype.clear_entity_table = function () {
+  goog.dom.removeChildren(goog.dom.getElement("entity-view"));    
+};
 
 ui.cloud_files.EntityTable.prototype.select_all_containers = function () {
   var testData = [

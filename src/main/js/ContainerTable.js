@@ -24,6 +24,7 @@ ui.cloud_files.ContainerTable.prototype.renderTable = function (data) {
         ui.cloud_files.ContainerTableTmpl({containers: data});
     var domTable = /** @type (Node) */ 
         goog.dom.htmlToDocumentFragment(htmlTable);
+
     goog.dom.appendChild(
         goog.dom.getElement("entity-view"),
         domTable);
