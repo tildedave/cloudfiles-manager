@@ -3,7 +3,9 @@ require 'json'
 require 'rubygems'
 require 'httpclient'
 require 'sinatra/reloader'
-require 'cgi'
+
+# being lame and using cloud files uploader
+require 'cloudfiles'
 
 # not doing any actual templating, all data
 # returned/parsed/displayed by JavaScript
@@ -48,7 +50,7 @@ class CloudFileRepository
 
   def api_get(uri, args)
     args[:format] = 'json'
-    puts "uri: #{uri}, token: #{@auth_token}"
+    STDERR.puts "uri: #{uri}, token: #{@auth_token}"
     header = [[ "X-Auth-Token", @auth_token ]]
     client = HTTPClient.new
     response = client.get_content(uri, args, header)
@@ -56,7 +58,6 @@ class CloudFileRepository
     puts response
     return response
   end
-
 end
 
 class CDNRepository < CloudFileRepository
@@ -103,7 +104,21 @@ class StorageRepository < CloudFileRepository
   def getFile (container, name)
     escaped_container = URI.escape(container)
     escaped_name = URI.escape(name)
+
     return api_get("#{@storage_url}/#{escaped_container}/#{escaped_name}", {})
+  end
+
+  def postFile (container, name, type, tmpfile)
+    escaped_container = URI.escape(container)
+    escaped_name = URI.escape(name)
+
+    # lameness follows
+    cf = CloudFiles::Connection.new(:username => Auth.get_user,
+                                    :api_key => Auth.get_api_key)
+
+    cfContainer = cf.container(container)
+    cfObject = cfContainer.create_object(name)
+    cfObject.write tmpfile
   end
 end
 
@@ -141,4 +156,21 @@ get '/containers/?' do
 
   content_type :json
   storage_repository.list
+end
+
+post '/upload/:container' do
+  storage_repository = StorageRepository.new(session)
+
+  STDERR.puts "PARAMS #{params}"
+
+  tmpfile = params[:file][:tempfile]
+  name = params[:file][:filename]
+  type = params[:file][:type]
+  container = params[:container]
+
+  STDERR.puts "tmpfile: #{tmpfile}  with name: #{name} to container: #{container}"
+
+  storage_repository = StorageRepository.new(session)
+  storage_repository.postFile params[:container], name, type, tmpfile
+
 end
