@@ -3,6 +3,7 @@ goog.provide('ui.cloud_files.ObjectTable');
 goog.require('goog.dom');
 goog.require('ui.Events');
 goog.require('goog.events.KeyHandler');
+goog.require('ui.cloud_files.Object');
 
 /**
  * @constructor
@@ -41,20 +42,13 @@ ui.cloud_files.ObjectTable.prototype.bindEvents = function () {
   };
   goog.events.listen(backButton, goog.events.EventType.CLICK, backHandler);
 
-  goog.events.listen(goog.dom.getDocument(),
-                     goog.events.KeyHandler.EventType.KEY,
-                     function (e) {
-                       var keyEvent = /** @type {goog.events.KeyEvent} */ (e);
-                       window.console.log(e);
-                       if (keyEvent.keyCode == goog.events.KeyCodes.ESC) {
-                         alert("esc");
-                       }
-                     });
-
   var uploadButton = goog.dom.getElement("uploadObject");
   goog.events.listen(uploadButton, goog.events.EventType.CLICK, function (e) {
     alert("Time to upload a file to " + container + "!");
   });
 
-  
+  var objectDoms = goog.dom.getElementsByClass("object");
+  for(var i = 0, l = objectDoms.length; i < l; ++i) {
+    new ui.cloud_files.Object(broker, container, objectDoms[i]);
+  }
 };

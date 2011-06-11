@@ -15,17 +15,22 @@ goog.inherits(ui.Broker, goog.events.EventTarget);
 
 ui.Broker.prototype.bindEvents = function () {
   var parentObj = this;
-  parentObj.addEventListener(ui.Events.SELECT_ALL_CONTAINERS,
+  this.addEventListener(ui.Events.SELECT_ALL_CONTAINERS,
                               function (e) {
                                 parentObj.clearBroker();
                                 parentObj.selectAllContainers();
                               });
   
-  parentObj.addEventListener(ui.Events.SELECT_CONTAINER,
+  this.addEventListener(ui.Events.SELECT_CONTAINER,
                               function (e) {
                                 parentObj.clearBroker();
                                 parentObj.selectContainer(e.target.name);
                               });
+
+  this.addEventListener(ui.Events.SELECT_OBJECT,
+                        function (e) {
+                          parentObj.downloadObject(e.target.container, e.target.name);
+                        });
 };
 
 ui.Broker.prototype.clearBroker = function () {
@@ -44,4 +49,6 @@ ui.Broker.prototype.selectContainer = function (name) {
   table.load();
 };
 
-
+ui.Broker.prototype.downloadObject = function(container, name) {
+  window.console.log("download object " + name + " from " + container);
+};

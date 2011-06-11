@@ -9,14 +9,16 @@ goog.require('ui.Events');
  * @constructor
  * @extends {goog.events.EventTarget}
  */
-ui.cloud_files.Object = function (dom, entityTable) {
+ui.cloud_files.Object = function (broker, container, dom) {
   goog.events.EventTarget.call(this);
   var text = goog.dom.getTextContent(dom);
+
   goog.events.listen(dom, goog.events.EventType.CLICK, function (e) {
     var event = new goog.events.Event(ui.Events.SELECT_OBJECT,
-                                      { name: text });
+                                      { container: container,
+                                        name: text });
     
-    goog.events.dispatchEvent(entityTable, event);
+    goog.events.dispatchEvent(broker, event);
   });
 };
 
