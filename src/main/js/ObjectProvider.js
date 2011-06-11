@@ -11,3 +11,4 @@ model.cache.ObjectProvider = function(data) {
 model.cache.ObjectProvider.prototype.get = function(table) {
   table.getResponse(this.data);
 };
+

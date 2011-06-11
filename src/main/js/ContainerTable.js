@@ -1,5 +1,4 @@
 goog.require('goog.dom');
-goog.require('model.cache.ContainerProvider');
 goog.require('ui.cloud_files.Container');
 
 goog.provide('ui.cloud_files.ContainerTable');

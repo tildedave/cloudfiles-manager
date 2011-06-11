@@ -8,6 +8,7 @@
       "src/main/js/ContainerTable.js",
       "src/main/js/ObjectTable.js",
       "src/main/js/Bootstrap.js",
+      "src/main/js/Providers.js",
       "src/main/soy/cloud_files.soy"
     ],
     "level": "VERBOSE",
